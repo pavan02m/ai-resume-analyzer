@@ -38,7 +38,9 @@ const Upload = () => {
 
         setStatusText("Uploading image...");
 
-        const uploadedImage = fs.upload([imageFile.file]);
+        const uploadedImage = await fs.upload([imageFile.file]);
+
+        console.log(uploadedImage);
 
         if(!uploadedImage){
             return setStatusText("Error: Failed to upload image...");
@@ -59,7 +61,7 @@ const Upload = () => {
 
         await kv.set(`resume:${uuid}`, JSON.stringify(data));
 
-        setStatusText("Analyzed data...");
+        setStatusText("Analyzing data...");
 
         const feedback = await ai.feedback(uploadedFile.path, prepareInstructions({jobTitle, jobDescription}));
 
@@ -74,6 +76,8 @@ const Upload = () => {
 
         setStatusText("Analysis completed, redirecting...");
         console.log(data);
+
+        navigate(`/resume/${uuid}`);
     }
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
