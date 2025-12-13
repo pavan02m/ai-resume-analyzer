@@ -21,7 +21,7 @@ declare global {
             };
             ai: {
                 chat: (
-                    prompt: string | ChatMessage[],
+                    prompt: string | ChatMessage | ChatMessage[],
                     imageURL?: string | PuterChatOptions,
                     testMode?: boolean,
                     options?: PuterChatOptions
